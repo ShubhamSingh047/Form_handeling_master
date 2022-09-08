@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import './Form.scss'
+
 
 const FormExampleForm = () => {
   const [state, nextState] = useState({
@@ -8,7 +10,7 @@ const FormExampleForm = () => {
     image: null,
   });
 
-  function removeImage() {
+  const removeImage=()=> {
     nextState((prevState) => {
       return { ...prevState, image: null };
     });
@@ -34,32 +36,45 @@ const FormExampleForm = () => {
       return { ...prevState, [e.target.name]: e.target.checked };
     });
   };
-  const { name, rollNumber, checkbox, image } = state;
+  const { image } = state;
   return (
     <>
-      <form>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" name="name" onChange={inputHandler} />
-        <br />
-        <label htmlFor="roll_numb">Roll Number:</label>
-        <input
+      <form className="container-form">
+      
+      <div className="field">
+        <label className="field-label" htmlFor="name">Name</label>
+        <input className="field-input" type="text" id="name" name="name" onChange={inputHandler} />
+      </div>
+
+      <div className="field">
+        <label className="field-label" htmlFor="roll_numb">Roll Number:</label>
+      <input
+          className="field-input"
           type="number"
           id="roll_numb"
           name="rollNumber"
           onChange={inputHandler}
         />
-        <br />
-        <label htmlFor="check_box">Term & Condition:</label>
-        <input
+      </div>
+      
+      <div className="field">
+        <label className="field-label" htmlFor="check_box">Term & Condition:</label>
+      <input
+          className="field-input"
           type="checkbox"
           id="check_box"
           name="checkbox"
           onChange={checkedHandler}
         />
-        <br />
-        <input type="submit" value="Submit" />
-        <br />
+      </div>
+
+        <div
+          style={{ width: "100px", marginLeft: "auto", marginRight: "auto" }}
+        >
+          <label className="field-label" htmlFor="file-input">
+          </label>
         <input
+          className="field-input"
           id="file-input"
           accept="image/*"
           type="file"
@@ -71,10 +86,6 @@ const FormExampleForm = () => {
             display: "none",
           }}
         />
-        <div
-          style={{ width: "100px", marginLeft: "auto", marginRight: "auto" }}
-        >
-          <label htmlFor="file-input">
             <img
               src={
                 image
@@ -82,27 +93,18 @@ const FormExampleForm = () => {
                   : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
               }
               alt="Thumb"
-              style={{
-                width: "100px",
-                border: "2px solid black",
-                display: "block",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
+              className="form-image"
             />
-          </label>
           <button
             onClick={removeImage}
-            style={{
-              display: "block",
-              marginLeft: "-50px",
-              marginRight: "auto",
-              width: "200px",
-            }}
+            className="form-button"
           >
             Remove
           </button>
         </div>
+
+        <input type="submit" value="Submit" />
+
       </form>
       {JSON.stringify(state)}
     </>
